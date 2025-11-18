@@ -1,0 +1,2 @@
+void hipotenusa();
+void estacionamiento();
