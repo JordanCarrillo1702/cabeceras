@@ -3,10 +3,10 @@
 
 int main(){
 
-    char nombres[Productos][TamanoNombre];
-    float precios[Productos];
-    int opcion;
-    IngresarDatos(nombres,precios);
+    char nombres[Productos][TamanoNombre];//Matriz para almacenar nombres 
+    float precios[Productos];// precios
+    int opcion;// para el menu
+    IngresarDatos(nombres,precios); // nos llama los datos y precios
 
     do{
         printf("1. Calcular precio total\n");
@@ -18,20 +18,20 @@ int main(){
         scanf("%d", &opcion);
 
         if(opcion ==1){
-            float total =Calculartotal(precios);
-            printf("El precio total del inventario es: %2.f\n",total);
+            float total =Calculartotal(precios); // funcion que suma todos los productos
+            printf("El precio total del inventario es: %.2f\n",total);
         }
 
-        else if(opcion ==2){
+        else if(opcion ==2){// producto mas caro y barato
             int precioMax = CalcularMax(precios);
-            printf("El producto mas caro es: %s, con un precio de: %2.f\n",nombres[precioMax],precios[precioMax]);
+            printf("El producto mas caro es: %s, con un precio de: %.2f\n",nombres[precioMax],precios[precioMax]);
             int precioMin= CalcularMin(precios);
-            printf("El producto mas barato es: %s, con un precio de: %2.f\n",nombres[precioMin],precios[precioMin]);
+            printf("El producto mas barato es: %s, con un precio de: %.2f\n",nombres[precioMin],precios[precioMin]);
         }
 
-        else if(opcion ==3){
+        else if(opcion ==3){//promedio de precios
             float promedio = CalcularPromedio(precios);
-            printf("El promedio de todos los articulos es: %2.f\n",promedio);
+            printf("El promedio de todos los articulos es: %.2f\n",promedio);
         }
 
         else if(opcion ==4){
@@ -53,7 +53,6 @@ int main(){
             printf(" Opcion invalida, intente nuevamente\n");
         }
 
-    } while (opcion !=5);
+    } while (opcion !=5); // repite hasta que el usuario decida salir
 
-    return 0;
 }
