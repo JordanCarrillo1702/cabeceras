@@ -1,0 +1,87 @@
+#include <stdio.h>
+#define MAX 31
+
+void IngresarTemp(float temps[], int *numDias);
+void IngresarTempIndividual(float temps[], int *numDias);
+void IngresarTempPregunta(float temps[], int *numDias);
+void ImprimirTemperaturas(const float temps[], int numDias);
+float temperaturaPromedio(const float temps[], int numDias);
+
+int main (int argc, char *argv[]) {
+
+    float temperaturas[MAX];
+    int dias = 0;
+
+    IngresarTemp(temperaturas, &dias);
+    IngresarTempIndividual(temperaturas, &dias);
+    IngresarTempPregunta(temperaturas, &dias);
+
+    ImprimirTemperaturas(temperaturas, dias);
+    printf("\nLa temperatura promedio es: %.2f\n", temperaturaPromedio(temperaturas, dias));
+
+    return 0;
+}
+
+void IngresarTemp(float temps[], int *numDias){
+    int n;
+    printf("¿Cuántos días desea registrar? ");
+    scanf("%d", &n);
+
+    if(n > MAX){
+        printf("No puede registrar más de %d días. Se usará el máximo permitido.\n", MAX);
+        n = MAX;
+    }
+
+    for(int i = 0; i < n; i++){
+        printf("Ingrese la temperatura del día %d: ", i + 1);
+        scanf("%f", &temps[i]);
+    }
+
+    *numDias = n;
+}
+
+void IngresarTempIndividual(float temps[], int *numDias){
+    if(*numDias < MAX){
+        printf("\nIngrese la temperatura del día %d: ", *numDias + 1);
+        scanf("%f", &temps[*numDias]);
+        (*numDias)++;
+    } else {
+        printf("\nNo se puede ingresar más días, límite alcanzado.\n");
+    }
+}
+
+void IngresarTempPregunta(float temps[], int *numDias){
+    int opc;
+
+    do{
+        if(*numDias == MAX){
+            printf("\nSe ha alcanzado el máximo de días (%d).\n", MAX);
+            break;
+        }
+
+        printf("\nIngrese la temperatura del día %d: ", *numDias + 1);
+        scanf("%f", &temps[*numDias]);
+        (*numDias)++;
+
+        printf("¿Desea ingresar otra temperatura? 1=Sí, 0=No: ");
+        scanf("%d", &opc);
+
+    } while(opc != 0);
+}
+
+void ImprimirTemperaturas(const float temps[], int numDias){
+    printf("\n--- Temperaturas Registradas ---\n");
+    for(int i = 0; i < numDias; i++){
+        printf("Día %d: %.2f°C\n", i + 1, temps[i]);
+    }
+}
+
+float temperaturaPromedio(const float temps[], int numDias){
+    float suma = 0;
+
+    for(int i = 0; i < numDias; i++){
+        suma += temps[i];
+    }
+
+    return suma / numDias;
+}
